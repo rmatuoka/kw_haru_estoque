@@ -1,0 +1,20 @@
+<%= form_for [:admin, @supply] do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :product_id, "Produto" %>
+	<%= f.select :product_id, @products, :prompt => "Escolha o produto" %>
+  </p>
+  <p>
+    <%= f.label :quantity, "Quantidade" %>
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.label :buy, "Compra?" %>
+    <%= f.check_box :buy %>
+  </p>
+  <p>
+    <%= f.label :input_date, "Data" %>
+    <%= f.date_select :input_date %>
+  </p>
+  <p><%= f.submit "Salvar", :class => "button" %></p>
+<% end %>

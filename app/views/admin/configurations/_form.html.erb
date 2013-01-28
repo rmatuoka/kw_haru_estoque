@@ -1,0 +1,8 @@
+<%= form_for [:admin, @configuration] do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :alert, "Nº mínimo em estoque" %>
+    <%= f.text_field :alert %>
+  </p>
+  <p><%= f.submit "Salvar", :class => "button" %></p>
+<% end %>

@@ -1,0 +1,9 @@
+<% title "Editar Produto" %>
+<h1>Editar Produto</h1>
+
+<%= render 'form' %>
+
+<p>
+  <%= link_to "Ver", [:admin, @product], :class => "small button secondary" %> |
+  <%= link_to "Ver todos", admin_products_path, :class => "small button secondary" %>
+</p>

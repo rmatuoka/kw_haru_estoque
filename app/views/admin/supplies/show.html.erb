@@ -1,0 +1,25 @@
+<% title "Movimentação" %>
+<h1>Movimentação</h1>
+
+<p>
+  <strong>Produto:</strong>
+  <%= @supply.product_id %>
+</p>
+<p>
+  <strong>Quantidade:</strong>
+  <%= @supply.quantity %>
+</p>
+<p>
+  <strong>Compra?:</strong>
+  <%= @supply.buy %>
+</p>
+<p>
+  <strong>Data:</strong>
+  <%= @supply.input_date %>
+</p>
+
+<p>
+  <%= link_to "Editar", edit_admin_supply_path(@supply), :class => "small button secondary" %> 
+  <%= link_to "Deletar", [:admin, @supply], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %> 
+  <%= link_to "Ver todos", admin_supplies_path, :class => "small button secondary" %>
+</p>

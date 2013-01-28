@@ -1,0 +1,32 @@
+<% title "Estoque" %>
+<h1>Estoque</h1>
+
+<p><%= link_to "+ Adicionar movimentação", new_admin_supply_path, :class => "button" %></p>
+<table width="100%">
+  <tr>
+    <th>Produto</th>
+    <th>Quantidade</th>
+    <th>Tipo</th>
+    <th>Data</th>
+  </tr>
+  <% for supply in @supplies %>
+    <tr <%= "style='background-color:#ffcccc;'" if !supply.buy%>>
+      <td><%= supply.product.name %></td>
+      <td><%= supply.quantity %></td>
+      <td>
+		<% case supply.buy %>
+		<%when true%>
+			Compra
+		<%when false%>
+			Retirada
+		<%end%>
+	  </td>
+      <td><%= supply.input_date %></td>
+      <td><%= link_to "Ver", [:admin, supply], :class => "small button secondary" %></td>
+      <td><%= link_to "Editar", edit_admin_supply_path(supply), :class => "small button secondary" %></td>
+      <td><%= link_to "Deletar", [:admin, supply], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "+ Adicionar movimentação", new_admin_supply_path, :class => "button" %></p>

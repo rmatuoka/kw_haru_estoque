@@ -1,0 +1,19 @@
+<% title "Produtos" %>
+<h1>Produtos</h1>
+
+<p><%= link_to "+ Adicionar Produto", new_admin_product_path, :class => "button" %></p>
+<table width="100%">
+  <tr>
+    <th>Nome</th>
+  </tr>
+  <% for product in @products %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= link_to "Ver", [:admin, product], :class => "small button secondary" %>
+      <%= link_to "Editar", edit_admin_product_path(product), :class => "small button secondary" %>
+      <%= link_to "Deletar", [:admin, product], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "+ Adicionar Produto", new_admin_product_path, :class => "button" %></p>

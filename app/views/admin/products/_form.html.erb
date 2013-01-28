@@ -1,0 +1,12 @@
+<%= form_for [:admin, @product] do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name, :placeholder => "Digite o nome do produto" %>
+  </p>
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description, :placeholder => "Digite a descrição do produtos (opcional)" %>
+  </p>
+  <p><%= f.submit "Salvar", :class => "button" %></p>
+<% end %>

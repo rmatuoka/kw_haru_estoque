@@ -1,0 +1,9 @@
+<% title "Editar Movimentação" %>
+<h1>Editar Movimentação</h1>
+
+<%= render 'form' %>
+
+<p>
+  <%= link_to "Ver", [:admin, @supply], :class => "small button secondary" %> |
+  <%= link_to "Ver todos", admin_supplies_path, :class => "small button secondary" %>
+</p>

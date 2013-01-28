@@ -1,0 +1,12 @@
+<% title "Admin/Configuration" %>
+
+<p>
+  <strong>Alert:</strong>
+  <%= @configuration.alert %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_admin_configuration_path(@configuration) %> |
+  <%= link_to "Destroy", [:admin, @configuration], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_configurations_path %>
+</p>

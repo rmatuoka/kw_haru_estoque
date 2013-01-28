@@ -1,0 +1,17 @@
+<% title "Admin/Configurations" %>
+
+<table>
+  <tr>
+    <th>Alert</th>
+  </tr>
+  <% for configuration in @configurations %>
+    <tr>
+      <td><%= configuration.alert %></td>
+      <td><%= link_to "Show", [:admin, configuration] %></td>
+      <td><%= link_to "Edit", edit_admin_configuration_path(configuration) %></td>
+      <td><%= link_to "Destroy", [:admin, configuration], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Admin/Configuration", new_admin_configuration_path %></p>

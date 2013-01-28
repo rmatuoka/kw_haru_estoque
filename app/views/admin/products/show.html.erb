@@ -1,0 +1,17 @@
+<% title "Produto" %>
+<h1>Produto</h1>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @product.name %>
+</p>
+<p>
+  <strong>Descrição:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <%= link_to "Editar", edit_admin_product_path(@product), :class => "small button secondary" %> 
+  <%= link_to "Deletar", [:admin, @product], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %> 
+  <%= link_to "Ver todos", admin_products_path, :class => "small button secondary" %>
+</p>
