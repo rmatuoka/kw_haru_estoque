@@ -16,5 +16,10 @@
     <%= f.label :input_date, "Data" %>
     <%= f.date_select :input_date %>
   </p>
+  <%if User.find(current_user.id).has_role? :admin %>
   <p><%= f.submit "Salvar", :class => "button" %></p>
+  <% end %>
+    <%if User.find(current_user.id).has_role? :supervisor %>
+  <p><%= f.submit "Salvar", :class => "button" %></p>
+  <% end %>
 <% end %>

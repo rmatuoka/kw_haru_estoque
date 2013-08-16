@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128152203) do
+ActiveRecord::Schema.define(:version => 20130816142907) do
 
   create_table "configurations", :force => true do |t|
     t.integer  "alert"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20130128152203) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "minimum",     :default => 0, :null => false
   end
 
   create_table "roles", :force => true do |t|

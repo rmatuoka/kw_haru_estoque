@@ -1,7 +1,11 @@
 <% title "Estoque" %>
 <h1>Estoque</h1>
-
+<%if User.find(current_user.id).has_role? :admin  %>
 <p><%= link_to "+ Adicionar movimentação", new_admin_supply_path, :class => "button" %></p>
+<% end %>
+<%if User.find(current_user.id).has_role? :supervisor %>
+<p><%= link_to "+ Adicionar movimentação", new_admin_supply_path, :class => "button" %></p>
+<% end %>
 <table width="100%">
   <tr>
     <th>Produto</th>
@@ -23,10 +27,21 @@
 	  </td>
       <td><%= supply.input_date %></td>
       <td><%= link_to "Ver", [:admin, supply], :class => "small button secondary" %></td>
+      <%if User.find(current_user.id).has_role? :admin  %>
       <td><%= link_to "Editar", edit_admin_supply_path(supply), :class => "small button secondary" %></td>
-      <td><%= link_to "Deletar", [:admin, supply], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %></td>
+      <td><%= link_to "Deletar", [:admin, supply], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %>
+      </td>
+      <% end %>
+      <%if User.find(current_user.id).has_role? :supervisor  %>
+      <td><%= link_to "Editar", edit_admin_supply_path(supply), :class => "small button secondary" %></td>
+      </td>
+      <% end %>
     </tr>
   <% end %>
 </table>
-
+<%if User.find(current_user.id).has_role? :admin  %>
 <p><%= link_to "+ Adicionar movimentação", new_admin_supply_path, :class => "button" %></p>
+<% end %>
+<%if User.find(current_user.id).has_role? :supervisor %>
+<p><%= link_to "+ Adicionar movimentação", new_admin_supply_path, :class => "button" %></p>
+<% end %>

@@ -3,6 +3,7 @@ class Admin::ProductsController < ApplicationController
   
   def index
     @products = Product.all
+    @supplies = Supply.all
   end
 
   def show
