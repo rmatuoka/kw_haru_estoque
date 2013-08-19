@@ -6,17 +6,32 @@
 <table width="100%">
   <tr>
     <th>Nome</th>
+    <th>Quantidade</th>
   </tr>
-  <% for product in @products %>
-    <tr>
-      <td><%= product.name %></td>
-      <td><%= link_to "Ver", [:admin, product], :class => "small button secondary" %>
-      <%if User.find(current_user.id).has_role? :admin %>
-      <%= link_to "Editar", edit_admin_product_path(product), :class => "small button secondary" %>
-      <%= link_to "Deletar", [:admin, product], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %></td>
-      <% end %>
-    </tr>
+  <%$entrada = 0%>
+  <%$saida = 0%>
+<% for product in @products %>
+  <tr>
+  <td><%= product.name %></td>
+  <%$prod_supply = @supplies.select { |supply| supply.product_id == product.id}%>
+  <% if $prod_supply.count > 0%>
+    <%$prod_supply.each do |supp|%>
+      <% supp.buy ? $entrada += supp.quantity : $saida += supp.quantity%>
+    <% end %>
+    
+    <td><%= $entrada - $saida %></td>
+    <%$entrada = 0%>
+    <%$saida = 0%>
+  <% else%>
+    <td>0</td>
   <% end %>
+  <td><%= link_to "Ver", [:admin, product], :class => "small button secondary" %>
+  <!--<%#if User.find(current_user.id).has_role? :admin %>-->
+  <%= link_to "Editar", edit_admin_product_path(product), :class => "small button secondary" %>
+  <%= link_to "Deletar", [:admin, product], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %></td>
+  <!--<%# end %>-->
+  </tr>
+<% end %>
 </table>
 <%if User.find(current_user.id).has_role? :admin %>
 <p><%= link_to "+ Adicionar Produto", new_admin_product_path, :class => "button" %></p>

@@ -1,6 +1,5 @@
 class Admin::ProductsController < ApplicationController
   layout "inadmin"
-  
   def index
     @products = Product.all
     @supplies = Supply.all
@@ -41,4 +40,5 @@ class Admin::ProductsController < ApplicationController
     @product.destroy
     redirect_to admin_products_url, :notice => "Successfully destroyed product."
   end
+
 end
