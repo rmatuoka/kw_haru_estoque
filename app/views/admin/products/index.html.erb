@@ -7,24 +7,27 @@
   <tr>
     <th>Nome</th>
     <th>Quantidade</th>
+    <th>Estroque mínimo</th>
   </tr>
   <%$entrada = 0%>
   <%$saida = 0%>
 <% for product in @products %>
-  <tr>
-  <td><%= product.name %></td>
   <%$prod_supply = @supplies.select { |supply| supply.product_id == product.id}%>
   <% if $prod_supply.count > 0%>
     <%$prod_supply.each do |supp|%>
       <% supp.buy ? $entrada += supp.quantity : $saida += supp.quantity%>
     <% end %>
-    
-    <td><%= $entrada - $saida %></td>
-    <%$entrada = 0%>
-    <%$saida = 0%>
-  <% else%>
+  <tr <%=(($entrada - $saida) < product.minimum) ? "style='background-color:#ffcccc'" : "style='background-color:#fff'"%>>
+  <td><%= product.name %></td>
+  <td><%= $entrada - $saida %></td>
+    <% else%>
+    <tr>
+  <td><%= product.name %></td>
     <td>0</td>
   <% end %>
+    <%$entrada = 0%>
+    <%$saida = 0%>
+  <td><%= product.minimum%></td>
   <td><%= link_to "Ver", [:admin, product], :class => "small button secondary" %>
   <%if User.find(current_user.id).has_role? :admin %>
   <%= link_to "Editar", edit_admin_product_path(product), :class => "small button secondary" %>
