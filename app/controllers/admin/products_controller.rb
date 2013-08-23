@@ -1,7 +1,7 @@
 class Admin::ProductsController < ApplicationController
   layout "inadmin"
   def index
-    @products = Product.all
+    @products = Product.all(:order => :name)
     @supplies = Supply.all
   end
 
@@ -39,6 +39,12 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
     redirect_to admin_products_url, :notice => "Successfully destroyed product."
+  end
+  
+  def search
+    if !params[:keyword].blank?
+      @Results = Product.search_for(params[:keyword]).paginate :page => params[:page],:per_page => 20
+    end
   end
 
 end

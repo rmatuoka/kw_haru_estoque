@@ -3,14 +3,26 @@
 <%if User.find(current_user.id).has_role? :admin %>
 <p><%= link_to "+ Adicionar Produto", new_admin_product_path, :class => "button" %></p>
 <% end %>
-<table width="100%">
+
+<div id="search" class="twelve columns">
+<p>Informe o nome do produto.</p>
+        <%=form_tag '/admin/products/search', :method => :get, :name=>"formkeyword"%>
+                <%=text_field_tag :keyword, nil %>
+                <%=submit_tag "Buscar", :class => "button secondary"%>
+        </form>
+</div>
+
+<table width="100%" class="tablesorter">
+<thead>
   <tr>
     <th>Nome</th>
     <th>Quantidade</th>
     <th>Estroque mínimo</th>
   </tr>
+</thead>
   <%$entrada = 0%>
   <%$saida = 0%>
+  <tbody>
 <% for product in @products %>
   <%$prod_supply = @supplies.select { |supply| supply.product_id == product.id}%>
   <% if $prod_supply.count > 0%>
@@ -35,6 +47,7 @@
   <% end %>
   </tr>
 <% end %>
+</tbody>
 </table>
 <%if User.find(current_user.id).has_role? :admin %>
 <p><%= link_to "+ Adicionar Produto", new_admin_product_path, :class => "button" %></p>

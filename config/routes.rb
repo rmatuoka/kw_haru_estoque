@@ -10,7 +10,11 @@ KwHaruEstoque::Application.routes.draw do
   namespace(:admin){
     resources :supplies
     resources :reports
-    resources :products
+    resources :products do
+      collection do
+        get 'search'
+      end
+    end
     resources :static_contents
     resources :users do
       collection do
