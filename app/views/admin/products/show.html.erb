@@ -9,7 +9,10 @@
   <strong>Descrição:</strong>
   <%= @product.description %>
 </p>
-
+<p>
+  <strong>Estoque Minimo:</strong>
+  <%= @product.minimum %>
+</p>
 <p>
   <%= link_to "Editar", edit_admin_product_path(@product), :class => "small button secondary" %> 
   <%= link_to "Deletar", [:admin, @product], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %> 

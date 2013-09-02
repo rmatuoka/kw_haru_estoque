@@ -5,20 +5,42 @@
 <h1>Buscando por: <%=params[:keyword]%></h1>
 <br />
 
-<table>
+<table width="100%" class="tablesorter">
+<thead>
   <tr>
-    <th width="200px">Nome</th>
+    <th>Nome</th>
+    <th>Quantidade</th>
+    <th>Estroque mínimo</th>
   </tr>
-  	<%@Results.each do |product| %>
+</thead>
+  <%$entrada = 0%>
+  <%$saida = 0%>
+  <tbody>
+<% for product in @products %>
+  <%$prod_supply = @supplies.select { |supply| supply.product_id == product.id}%>
+  <% if $prod_supply.count > 0%>
+    <%$prod_supply.each do |supp|%>
+      <% supp.buy ? $entrada += supp.quantity : $saida += supp.quantity%>
+    <% end %>
+  <tr <%=(($entrada - $saida) < product.minimum) ? "style='background-color:#ffcccc'" : "style='background-color:#fff'"%>>
+  <td><%= product.name %></td>
+  <td><%= $entrada - $saida %></td>
+    <% else%>
     <tr>
-      <td><%= product.name %></td>
-      <td><%= link_to "Ver", [:admin, product], :class => "small button secondary" %>
-      <%if User.find(current_user.id).has_role? :admin %>
-      <%= link_to "Editar", edit_admin_product_path(product), :class => "small button secondary" %>
-      <%= link_to "Deletar", [:admin, product], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %></td>
-      <% end %>
-    </tr>
+  <td><%= product.name %></td>
+    <td>0</td>
   <% end %>
+    <%$entrada = 0%>
+    <%$saida = 0%>
+  <td><%= product.minimum%></td>
+  <td><%= link_to "Ver", [:admin, product], :class => "small button secondary" %>
+  <%if User.find(current_user.id).has_role? :admin %>
+  <%= link_to "Editar", edit_admin_product_path(product), :class => "small button secondary" %>
+  <%= link_to "Deletar", [:admin, product], :confirm => 'Are you sure?', :method => :delete, :class => "small button secondary" %></td>
+  <% end %>
+  </tr>
+<% end %>
+</tbody>
 </table>
 <br><br>
-<%=link_to "Voltar", admin_users_path, :class => "button"%>
+<%=link_to "Voltar", admin_products_path, :class => "button"%>

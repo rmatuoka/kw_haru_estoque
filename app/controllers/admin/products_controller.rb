@@ -43,7 +43,8 @@ class Admin::ProductsController < ApplicationController
   
   def search
     if !params[:keyword].blank?
-      @Results = Product.search_for(params[:keyword]).paginate :page => params[:page],:per_page => 20
+      @products = Product.search_for(params[:keyword]).paginate :page => params[:page],:per_page => 20
+      @supplies = Supply.all
     end
   end
 

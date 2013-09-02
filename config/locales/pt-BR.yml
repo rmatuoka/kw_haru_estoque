@@ -154,13 +154,13 @@
       submit: 'Salvar %{model}'
 
   errors:
-    format: "%{attribute} %{message}"
-
-    template:
+    template: &errors_template
       header:
-        one: "Não foi possível gravar %{model}: 1 erro"
-        other: "Não foi possível gravar %{model}: %{count} erros."
-      body: "Por favor, verifique o(s) seguinte(s) campo(s):"
+        one: "Não foi possível gravar! Existe um erro."
+        other: "Não foi possível gravar! Existe alguns erros."
+      body: 
+        one: "Por favor, verifique o seguinte campo:"
+        other: "Por favor, verifique os seguintes campos:"
 
     messages: &errors_messages
       inclusion: "não está incluído na lista"
@@ -182,14 +182,12 @@
       less_than_or_equal_to: "deve ser menor ou igual a %{count}"
       odd: "deve ser ímpar"
       even: "deve ser par"
+      check_over_18: "deve ter mais de 18 anos"
 
   activerecord:
     errors:
       template:
-        header:
-          one: "Não foi possível gravar %{model}: 1 erro"
-          other: "Não foi possível gravar %{model}: %{count} erros."
-        body: "Por favor, verifique o(s) seguinte(s) campo(s):"
+        <<: *errors_template
 
       messages:
         taken: "já está em uso"
@@ -198,6 +196,12 @@
 
       full_messages:
         format: "%{attribute} %{message}"
+    attributes:
+        #Campos especificos de acordo com cada tabela
+        supply:
+            product_id: "Produto" 
+            quantity: "Quantidade"
+
         
         
     authlogic:
